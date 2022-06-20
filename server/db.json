@@ -13,7 +13,7 @@
       "headquarters": "US",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/5/53/Rockstar_Games_Logo.svg",
       "games":     
-            {"adventure":  
+            [{"adventure":  
                 [
                     {   
                         "id": 1,
@@ -32,7 +32,7 @@
                         "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg?t=1618851907"
                     }
                 ]
-            },
+            }],
       "id": 2
     },
     {
@@ -49,7 +49,7 @@
       "headquarters": "Japan",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Square_Enix_logo.svg/1024px-Square_Enix_logo.svg.png",
       "games":
-        {"RPG":  
+        [{"RPG":  
           [
             {   
                 "id": 3,
@@ -60,7 +60,7 @@
                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VAWGsaRhBUKcyxQv5rtPkm5axtyn2sfRfA&usqp=CAU"
             }
           ]
-        },
+        }],
       "id": 4
     },
     {

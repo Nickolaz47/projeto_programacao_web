@@ -48,7 +48,19 @@
       "foundation": "22 September 1975",
       "headquarters": "Japan",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Square_Enix_logo.svg/1024px-Square_Enix_logo.svg.png",
-      "games": [],
+      "games":
+        {"RPG":  
+          [
+            {   
+                "id": 3,
+                "name": "Kingdom Hearts III",
+                "developer": "Square Enix",
+                "genre": "RPG",
+                "released": "25 Jan, 2019",
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VAWGsaRhBUKcyxQv5rtPkm5axtyn2sfRfA&usqp=CAU"
+            }
+          ]
+        },
       "id": 4
     },
     {

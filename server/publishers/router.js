@@ -1,7 +1,7 @@
 const express = require('express')
 const fs = require('fs/promises')
-const companiesRouter = express.Router()
-const db = './server/companies/data.json'
+const publishersRouter = express.Router()
+const db = './server/publishers/data.json'
 
 const readDb = async () => {
     const dbJSON = await fs.readFile(db)    
@@ -20,61 +20,61 @@ const generateId = async () => {
     }        
 }
 
-companiesRouter.get('/', async (req, res) => {
+publishersRouter.get('/', async (req, res) => {
     const dbJSON = await readDb()    
     res.json(dbJSON);
 })
 
-companiesRouter.post('/', async (req, res) => {
-    const companiesDb = await readDb()        
+publishersRouter.post('/', async (req, res) => {
+    const publishersDb = await readDb()        
     const newRegister = req.body    
     newRegister.id = await generateId()    
-    companiesDb.push(newRegister)
-    await fs.writeFile(db, JSON.stringify(companiesDb))
+    publishersDb.push(newRegister)
+    await fs.writeFile(db, JSON.stringify(publishersDb))
     res.status(201).json(newRegister)
 })
 
-companiesRouter.put('/:companyId', async (req, res) => {
-    const companiesDb = await readDb()
+publishersRouter.put('/:companyId', async (req, res) => {
+    const publishersDb = await readDb()
     const {name, foundation, headquarters, logo, games} = req.body
     const {companyId} = req.params
     const companyIdNumber = Number(companyId)
-    const companyToUpdate = companiesDb.find(
+    const companyToUpdate = publishersDb.find(
         company => company.id === companyIdNumber
     )
     
     if(companyToUpdate !== undefined) {        
-        companiesDb.forEach(company => {
+        publishersDb.forEach(company => {
             if (company.id === companyIdNumber) {
                 company.name = name === undefined ? companyToUpdate.name : name
                 company.foundation = foundation === undefined ? companyToUpdate.foundation : foundation
                 company.headquarters = headquarters === undefined ? companyToUpdate.headquarters : headquarters
                 company.logo = logo === undefined ? companyToUpdate.logo : logo
-                company.games = games === undefined ? companyToUpdate.games : games
+                company.games = games === undefined ? [...games, ...companyToUpdate.games] : games
             }
         })
-        await fs.writeFile(db, JSON.stringify(companiesDb))
+        await fs.writeFile(db, JSON.stringify(publishersDb))
         res.status(200).send(`Atualizado!`)
     } else {
         res.status(400).send('Id inválido!')
     }
 })
 
-companiesRouter.delete('/:companyId', async (req, res) => {
-    const companiesDb = await readDb()
+publishersRouter.delete('/:companyId', async (req, res) => {
+    const publishersDb = await readDb()
     const {companyId} = req.params
     const companyIdNumber = Number(companyId)    
-    const companyToDelete = companiesDb.find(
+    const companyToDelete = publishersDb.find(
         company => company.id === companyIdNumber
     )
 
     if(companyToDelete !== undefined) {       
-        companiesDb.splice(companiesDb.indexOf(companyToDelete), 1)
-        await fs.writeFile(db, JSON.stringify(companiesDb))        
+        publishersDb.splice(publishersDb.indexOf(companyToDelete), 1)
+        await fs.writeFile(db, JSON.stringify(publishersDb))        
         res.status(200).send(companyToDelete)
     } else {
         res.status(400).send('Id inválido!')
     }
 })
 
-module.exports = companiesRouter
+module.exports = publishersRouter

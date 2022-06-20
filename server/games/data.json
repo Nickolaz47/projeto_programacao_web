@@ -1,0 +1,218 @@
+[
+    {
+      "id": 1,
+      "name": "The Elder Scrolls V: Skyrim Special Edition",
+      "developer": "Bethesda Game Studios",
+      "genre": "RPG",
+      "released": "27 Oct, 2016",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/489830/header.jpg?t=1650909796"
+    },
+  
+    {
+      "id": 2,
+      "name": "The Guild 3",
+      "developer": "Purple Lamp/GolemLabs",
+      "genre": "Simulation",
+      "released": "14 Jun,2011",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/311260/header.jpg?t=1655299296"
+    },
+  
+    {
+      "id": 3,
+      "name": "Going Medieval",
+      "developer": "Foxy Vogel",
+      "genre": "RPG",
+      "released": "1 Jun, 2021",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1029780/header.jpg?t=1654080734"
+    },
+  
+    {
+      "id": 4,
+      "name": "Fallout 4",
+      "developer": "Bethesda Game Studios",
+      "genre": "RPG",
+      "released": "10 Nov, 2015",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/377160/header.jpg?t=1650909928"
+    },
+  
+    {
+      "id": 5,
+      "name": "Call of Duty: Black Ops III",
+      "developer": "Treyarch, Aspyr",
+      "genre": "FPS",
+      "released": "6 Nov, 2015",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/311210/header.jpg?t=1646763462"
+    },
+  
+    {
+      "id": 6,
+      "name": "Journey",
+      "developer": "Facepunch Studios",
+      "genre": "Adventure",
+      "released": "11 Jun, 2020",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/638230/header.jpg?t=1646936237"
+    },
+  
+    {
+      "id": 7,
+      "name": "Captain of Industry",
+      "developer": "MaFi Games",
+      "genre": "Simulation",
+      "released": "31 May, 2022",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1594320/header.jpg?t=1655345396"
+    },
+  
+    {
+      "id": 8,
+      "name": "Grand Theft Auto V",
+      "developer": "Rockstar North",
+      "genre": "Adventure",
+      "released": "14 Apr, 2015",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg?t=1618856444"
+    },
+  
+    {
+      "id": 9,
+      "name": "FINAL FANTASY VII REMAKE INTERGRADE",
+      "developer": "Square Enix",
+      "genre": "Adventure",
+      "released": "17 Jun, 2022",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1462040/header.jpg?t=1655449232"
+    },
+  
+    {
+      "id": 10,
+      "name": "Starfield",
+      "developer": "Bethesda Game Studios",
+      "genre": "Adventure",
+      "released": "2023",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg?t=1655219857"
+    },
+  
+    {
+      "id": 11,
+      "name": "Sniper Elite 5",
+      "developer": "Rebellion",
+      "genre": "Adventure",
+      "released": "25 May, 2022",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1029690/header.jpg?t=1654528999"
+    },
+  
+    {
+      "id": 12,
+      "name": "European Air War",
+      "developer": "MicroPose Software",
+      "genre": "Simulation",
+      "released": "16 Jun, 2022",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/514130/header.jpg?t=1655398740"
+    },
+  
+    {
+      "id": 13,
+      "name": "Mortal Kombat X",
+      "developer": "NetherRealm Studios",
+      "genre": "Fighting",
+      "released": "14 Apr, 215",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/307780/header.jpg?t=1588110604"
+    },
+  
+    {
+      "id": 14,
+      "name": "Valheim",
+      "developer": "Coffee Stain Publishing",
+      "genre": "RPG",
+      "released": "2 Feb, 2021",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/892970/header.jpg?t=1647939640"
+    },
+  
+    {
+      "id": 15,
+      "name": "Babylon's Fall",
+      "developer": "Square Enix",
+      "genre": "Adventure",
+      "released": "3 Mar, 2022",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/889750/header.jpg?t=1655302433"
+    },
+  
+    {
+      "id": 16,
+      "name": "Injustice 2",
+      "developer": "NetherRealm Studios",
+      "genre": "Fighting",
+      "released": "30 Nov 2017",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/627270/header.jpg?t=1573860511"
+    },
+  
+    {
+      "id": 17,
+      "name": "The Witcher 3: Wild Hunt",
+      "developer": "CD PROJEKT RED",
+      "genre": "RPG",
+      "released": "18 May, 2015",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg?t=1646996408"
+    },
+  
+    {
+      "id": 18,
+      "name": "Bravely Default II",
+      "developer": "Square Enix",
+      "genre": "RPG",
+      "released": "2 Sep, 2021",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1446650/header.jpg?t=1645786919"
+    },
+  
+    {
+      "id": 19,
+      "name": "Ultimate Epic Battle Simulator 2",
+      "developer": "Brilliant Game Studios",
+      "genre": "Simulation",
+      "released": "12 May, 2022",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1468720/header.jpg?t=1655306952"
+    },
+  
+    {
+      "id": 20,
+      "name": "L.A. Noire: The VR Case Files",
+      "developer": "Rockstar",
+      "genre": "Adventure",
+      "released": "15 Dec, 2017",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/722230/header.jpg?t=1618852074"
+    },
+  
+    {
+      "id": 21,
+      "name": "Red Dead Redemption 2",
+      "developer": "Rockstar",
+      "genre": "Adventure",
+      "released": "5 Dec, 2019",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg?t=1618851907"
+    },
+  
+    {
+      "id": 22,
+      "name": "Counter-Strike: Global Offensive",
+      "developer": "Valve",
+      "genre": "FPS",
+      "released": "21 August, 2012",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1641233427"
+    },
+  
+    {
+      "id": 23,
+      "name": "Left 4 Dead 2",
+      "developer": "Valve",
+      "genre": "FPS",
+      "released": "17 Nov, 2009",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/550/header.jpg?t=1630686839"
+    },
+  
+    {
+      "id": 24,
+      "name": "Battlefield V",
+      "developer": "Dice",
+      "genre": "FPS",
+      "released": "9 Nov, 2018",
+      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1238810/header.jpg?t=1641312066"
+    }
+  ]
+  

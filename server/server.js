@@ -1,11 +1,11 @@
 
 const express = require('express')
 const app = express()
-const companiesRouter = require('./companies/router')
+const publishersRouter = require('./publishers/router')
 
 app.use(express.json())
 
-app.use('/companies', companiesRouter)
+app.use('/publishers', publishersRouter)
 
 app.use('*', (req, res) => {
   res.send('Não há mapeamento para essa rota!')

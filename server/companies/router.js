@@ -39,17 +39,20 @@ companiesRouter.put('/:companyId', async (req, res) => {
     const {name, foundation, headquarters, logo, games} = req.body
     const {companyId} = req.params
     const companyIdNumber = Number(companyId)
-
-    if(!isNaN(companyIdNumber)) {
+    const companyToUpdate = companiesDb.find(
+        company => company.id === companyIdNumber
+    )
+    
+    if(companyToUpdate !== undefined) {        
         companiesDb.forEach(company => {
             if (company.id === companyIdNumber) {
-                company.name = name
-                company.foundation = foundation
-                company.headquarters = headquarters
-                company.logo = logo
-                company.games = games
+                company.name = name === undefined ? companyToUpdate.name : name
+                company.foundation = foundation === undefined ? companyToUpdate.foundation : foundation
+                company.headquarters = headquarters === undefined ? companyToUpdate.headquarters : headquarters
+                company.logo = logo === undefined ? companyToUpdate.logo : logo
+                company.games = games === undefined ? companyToUpdate.games : games
             }
-        })        
+        })
         await fs.writeFile(db, JSON.stringify(companiesDb))
         res.status(200).send(`Atualizado!`)
     } else {
@@ -66,7 +69,7 @@ companiesRouter.delete('/:companyId', async (req, res) => {
     )
 
     if(companyToDelete !== undefined) {       
-        companiesDb.splice(companiesDb.findIndex(companyToDelete), 1)
+        companiesDb.splice(companiesDb.indexOf(companyToDelete), 1)
         await fs.writeFile(db, JSON.stringify(companiesDb))        
         res.status(200).send(companyToDelete)
     } else {

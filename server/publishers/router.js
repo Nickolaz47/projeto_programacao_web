@@ -20,9 +20,48 @@ const generateId = async () => {
     }        
 }
 
+const sortObjs = (obj1, obj2) => {
+    if (obj1.name > obj2.name) {
+      return 1
+    } else if (obj1.name < obj2.name) {
+      return -1
+    } else {
+      return 0
+    }
+  }
+
 publishersRouter.get('/', async (req, res) => {
-    const dbJSON = await readDb()    
-    res.json(dbJSON);
+    const dbJSON = await readDb()
+    const { limit, name, sortBy } = req.query
+    let dbJSONMod = undefined
+    if (limit !== undefined && !isNaN(Number(limit))) {
+        dbJSONMod = dbJSON.slice(0, limit)
+    }
+    
+    if (sortBy === 'name') {
+        if (dbJSONMod) {
+            dbJSONMod = dbJSONMod.sort(sortObjs)            
+        } else {
+            dbJSONMod = dbJSON.sort(sortObjs)            
+        } 
+    }
+
+    if (name !== undefined) {
+        const nameToSearch = name.toLowerCase()
+        if (dbJSONMod) {
+            const objFound = dbJSONMod.find((obj) => obj.name.toLowerCase() === nameToSearch)
+            dbJSONMod = objFound
+        } else {
+            const objFound = dbJSON.find((obj) => obj.name.toLowerCase() === nameToSearch)
+            dbJSONMod = objFound
+        }      
+    }
+
+    if(dbJSONMod !== undefined) {
+        res.json(dbJSONMod)
+    } else {
+        res.json(dbJSON)
+    }
 })
 
 publishersRouter.post('/', async (req, res) => {

@@ -7,7 +7,7 @@ const gamesRouter = require('./games/router')
 
 app.use(express.json())
 app.use('/publishers', publishersRouter)
-app.use('/games', gamesRouter)
+// app.use('/games', gamesRouter)
 app.use('/genres', genresRouter)
 
 
@@ -15,7 +15,7 @@ app.use('*', (req, res) => {
   res.send('Não há mapeamento para essa rota!')
 })
 
-const PORT = 8080
+const PORT = 8484
 app.listen(PORT, () => {
   console.log(`Servidor disponível em http://localhost:${PORT}`)
 })

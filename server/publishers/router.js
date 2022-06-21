@@ -73,23 +73,23 @@ publishersRouter.post('/', async (req, res) => {
     res.status(201).json(newRegister)
 })
 
-publishersRouter.put('/:companyId', async (req, res) => {
+publishersRouter.put('/:publisherId', async (req, res) => {
     const publishersDb = await readDb()
     const {name, foundation, headquarters, logo, games} = req.body
-    const {companyId} = req.params
-    const companyIdNumber = Number(companyId)
-    const companyToUpdate = publishersDb.find(
-        company => company.id === companyIdNumber
+    const {publisherId} = req.params
+    const publisherIdNumber = Number(publisherId)
+    const publisherToUpdate = publishersDb.find(
+        publisher => publisher.id === publisherIdNumber
     )
     
-    if(companyToUpdate !== undefined) {        
-        publishersDb.forEach(company => {
-            if (company.id === companyIdNumber) {
-                company.name = name === undefined ? companyToUpdate.name : name
-                company.foundation = foundation === undefined ? companyToUpdate.foundation : foundation
-                company.headquarters = headquarters === undefined ? companyToUpdate.headquarters : headquarters
-                company.logo = logo === undefined ? companyToUpdate.logo : logo
-                company.games = games === undefined ? [...games, ...companyToUpdate.games] : games
+    if(publisherToUpdate !== undefined) {        
+        publishersDb.forEach(publisher => {
+            if (publisher.id === publisherIdNumber) {
+                publisher.name = name === undefined ? publisherToUpdate.name : name
+                publisher.foundation = foundation === undefined ? publisherToUpdate.foundation : foundation
+                publisher.headquarters = headquarters === undefined ? publisherToUpdate.headquarters : headquarters
+                publisher.logo = logo === undefined ? publisherToUpdate.logo : logo
+                publisher.games = games === undefined ? [...games, ...publisherToUpdate.games] : games
             }
         })
         await fs.writeFile(db, JSON.stringify(publishersDb))
@@ -99,18 +99,32 @@ publishersRouter.put('/:companyId', async (req, res) => {
     }
 })
 
-publishersRouter.delete('/:companyId', async (req, res) => {
+publishersRouter.delete('/:publisherId', async (req, res) => {
     const publishersDb = await readDb()
-    const {companyId} = req.params
-    const companyIdNumber = Number(companyId)    
-    const companyToDelete = publishersDb.find(
-        company => company.id === companyIdNumber
+    const {publisherId} = req.params
+    const publisherIdNumber = Number(publisherId)    
+    const publisherToDelete = publishersDb.find(
+        publisher => publisher.id === publisherIdNumber
     )
 
-    if(companyToDelete !== undefined) {       
-        publishersDb.splice(publishersDb.indexOf(companyToDelete), 1)
+    if(publisherToDelete !== undefined) {       
+        publishersDb.splice(publishersDb.indexOf(publisherToDelete), 1)
         await fs.writeFile(db, JSON.stringify(publishersDb))        
-        res.status(200).send(companyToDelete)
+        res.status(200).send(publisherToDelete)
+    } else {
+        res.status(400).send('Id inválido!')
+    }
+})
+
+publishersRouter.get('/:publisherId', async (req, res) => {
+    const dbJSON = await readDb()
+    const {publisherId} = req.params
+    const publisherIdNumber = Number(publisherId)    
+    const publisher = dbJSON.find(
+        publ => publ.id === publisherIdNumber
+    )
+    if(publisher !== undefined) {               
+        res.send(publisher)
     } else {
         res.status(400).send('Id inválido!')
     }

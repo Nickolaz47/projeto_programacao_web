@@ -1,7 +1,7 @@
 const express = require('express')
 const fs = require('fs/promises')
 const genresRouter = express.Router()
-const db = './server/db.json'
+const db = './db.json'
 
 const readDb = async () => {
     const dbJSON = await fs.readFile(db)    
@@ -20,9 +20,26 @@ const generateId = async () => {
     }        
 }
 
+async function removeDuplicates(array){
+    finalArray = [];
+    array.map(item => 
+        {if(!finalArray.includes(item)) {
+            finalArray.push(item);
+        }
+        });
+    return finalArray
+}
+
 genresRouter.get('/', async (req, res) => {
-    const dbJSON = await readDb()    
-    res.json(dbJSON);
+    const dbJSON = await readDb()
+    let genres = [];
+    dbJSON.map(company => 
+        {if (company.games.length > 0){
+            company.games.map(genre => genres.push(Object.keys(genre)[0]))
+        }}
+    )
+    genres = await removeDuplicates(genres)
+    res.json(genres);
 })
 
 genresRouter.post('/', async (req, res) => {

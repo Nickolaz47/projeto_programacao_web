@@ -56,7 +56,20 @@
       "foundation": "28 June 1986",
       "headquarters": "US",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/d/db/Bethesda_Softworks_Logo.svg",
-      "games": [],
+      "games": 
+        [{"RPG":  
+          [
+            {   
+                "id": 5,
+                "name": "The Elder Scrolls V: Skyrim",
+                "developer": "Bethesda",
+                "genre": "RPG",
+                "released": "11 Nov, 2011",
+                "img": "https://upload.wikimedia.org/wikipedia/pt/a/aa/The_Elder_Scrolls_5_Skyrim_capa.png"
+            }
+          ]
+        }],
+
       "id": 3
     },
     {

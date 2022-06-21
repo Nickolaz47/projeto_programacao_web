@@ -13,7 +13,7 @@
       "headquarters": "US",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/5/53/Rockstar_Games_Logo.svg",
       "games":     
-            [{"adventure":  
+            [{"Adventure":  
                 [
                     {   
                         "id": 1,
@@ -32,7 +32,23 @@
                         "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg?t=1618851907"
                     }
                 ]
-            }],
+            },
+            {
+              "Racing":  
+                [
+                    {   
+                        "id": 4,
+                        "name": "Midnight Club: Street Racing",
+                        "developer": "Rockstar North",
+                        "genre": "Racing",
+                        "released": "25 Out, 2000",
+                        "img": "https://upload.wikimedia.org/wikipedia/pt/thumb/2/25/Midnight_Club_Street_Racing_capa.jpg/270px-Midnight_Club_Street_Racing_capa.jpg"
+                    }
+                ]
+            
+            }
+          
+            ],
       "id": 2
     },
     {

@@ -43,12 +43,9 @@ genresRouter.get('/', async (req, res) => {
 })
 
 genresRouter.post('/', async (req, res) => {
-    const companiesDb = await readDb()        
-    const newRegister = req.body    
-    newRegister.id = await generateId()    
-    companiesDb.push(newRegister)
-    await fs.writeFile(db, JSON.stringify(companiesDb))
-    res.status(201).json(newRegister)
+    const newRegister = req.body;  
+    console.log("Recebi do post: " + newRegister.value); 
+    res.status(201).json(newRegister);
 })
 
 genresRouter.put('/:companyId', async (req, res) => {

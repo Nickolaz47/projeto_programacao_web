@@ -4,7 +4,52 @@
       "foundation": "28 March 1986",
       "headquarters": "France",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/7/78/Ubisoft_logo.svg",
-      "games": [],
+      "games": 
+        [{"Adventure":
+          [
+            {
+              "id": 1,
+              "name": "Assassin's Creed Unity",
+              "developer": "Ubisoft",
+              "genre": "Adventure",
+              "released": "11 Nov, 2014",
+              "img": "https://cdn.akamai.steamstatic.com/steam/apps/289650/header.jpg?t=1602601508"
+            },
+
+            {
+              "id": 2,
+              "name": "Tom Clancy's Ghost Recon Wildlands",
+              "developer": "Ubisoft",
+              "genre": "Adventure",
+              "released": "7 Mar, 2017",
+              "img": "https://cdn.akamai.steamstatic.com/steam/apps/460930/header.jpg?t=1602605434"
+            }
+          ],
+
+          "Action": 
+          [
+            {
+              "id": 3,
+              "name": "Far Cry 4",
+              "developer": "Ubisoft",
+              "genre": "Action",
+              "released": "18 Nov, 2014",
+              "img": "https://cdn.akamai.steamstatic.com/steam/apps/298110/header.jpg?t=1602602982"
+            },
+
+            {
+              "id": 4,
+              "name": "Cold Fear",
+              "developer": "Ubisoft",
+              "genre": "Action",
+              "released": "28 Mar, 2005",
+              "img": "https://cdn.akamai.steamstatic.com/steam/apps/15270/header.jpg?t=1565719542"
+            }
+          ]
+
+        }
+
+      ],
       "id": 1
     },
     {
@@ -16,7 +61,7 @@
             [{"Adventure":  
                 [
                     {   
-                        "id": 1,
+                        "id": 5,
                         "name": "Grand Theft Auto V",
                         "developer": "Rockstar North",
                         "genre": "Adventure",
@@ -24,20 +69,29 @@
                         "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg?t=1618856444"
                     },
                     {
-                        "id": 2,
+                        "id": 6,
                         "name": "Red Dead Redemption 2",
                         "developer": "Rockstar",
                         "genre": "Adventure",
                         "released": "5 Dec, 2019",
                         "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg?t=1618851907"
-                    }
+                    },
+
+                    {
+                      "id": 7,
+                      "name": "L.A. Noire: The VR Case Files",
+                      "developer": "Rockstar",
+                      "genre": "Adventure",
+                      "released": "15 Dec, 2017",
+                      "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/722230/header.jpg?t=1618852074" 
+                  }
                 ]
             },
             {
               "Racing":  
                 [
                     {   
-                        "id": 4,
+                        "id": 8,
                         "name": "Midnight Club: Street Racing",
                         "developer": "Rockstar North",
                         "genre": "Racing",
@@ -60,15 +114,38 @@
         [{"RPG":  
           [
             {   
-                "id": 5,
+                "id": 9,
                 "name": "The Elder Scrolls V: Skyrim",
                 "developer": "Bethesda",
                 "genre": "RPG",
                 "released": "11 Nov, 2011",
                 "img": "https://upload.wikimedia.org/wikipedia/pt/a/aa/The_Elder_Scrolls_5_Skyrim_capa.png"
+            },
+
+            {
+              "id": 10,
+              "name": "Fallout 4",
+              "developer": "Bethesda Game Studios",
+              "genre": "RPG",
+              "released": "10 Nov, 2015",
+              "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/377160/header.jpg?t=1650909928" 
             }
           ]
-        }],
+        },
+        {"Adventure":
+          [
+            {
+                "id": 11,
+                "name": "Starfield",
+                "developer": "Bethesda Game Studios",
+                "genre": "Adventure",
+                "released": "2023",
+                "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg?t=1655219857" 
+            }
+          ]
+
+        }
+      ],
 
       "id": 3
     },
@@ -81,15 +158,47 @@
         [{"RPG":  
           [
             {   
-                "id": 3,
+                "id": 12,
                 "name": "Kingdom Hearts III",
                 "developer": "Square Enix",
                 "genre": "RPG",
                 "released": "25 Jan, 2019",
                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VAWGsaRhBUKcyxQv5rtPkm5axtyn2sfRfA&usqp=CAU"
+            },
+
+              {
+                "id": 13,
+                "name": "Bravely Default II",
+                "developer": "Square Enix",
+                "genre": "RPG",
+                "released": "2 Sep, 2021",
+                "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1446650/header.jpg?t=1645786919" 
             }
           ]
-        }],
+        },
+        
+        {
+          "Adventure":[
+                {
+                  "id": 14,
+                  "name": "FINAL FANTASY VII REMAKE INTERGRADE",
+                  "developer": "Square Enix",
+                  "genre": "Adventure",
+                  "released": "17 Jun, 2022",
+                  "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/1462040/header.jpg?t=1655449232" 
+              },
+              {
+                "id": 15,
+                "name": "Babylon's Fall",
+                "developer": "Square Enix",
+                "genre": "Adventure",
+                "released": "3 Mar, 2022",
+                "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/889750/header.jpg?t=1655302433" 
+            }
+          ]
+        }
+      
+      ],
       "id": 4
     },
     {
@@ -97,7 +206,31 @@
       "foundation": "4 December 1992",
       "headquarters": "England",
       "logo": "https://upload.wikimedia.org/wikipedia/en/9/97/Rebellion_Developments_logo.svg",
-      "games": [],
+      "games": 
+        [{
+          "Adventure": 
+          [
+            {
+              "id": 16,
+                "name": "Sniper Elite 5",
+                "developer": "Rebellion",
+                "genre": "Adventure",
+                "released": "25 May, 2022",
+                "img": "https://cdn.akamai.steamstatic.com/steam/apps/1029690/header.jpg?t=1655800990"
+            },
+            
+            {
+              "id": 17,
+              "name": "Lords Of The Fallen",
+              "developer": "Rebellion",
+              "genre": "Adventure",
+              "released": "28 Oct, 2014",
+              "img": "https://cdn.akamai.steamstatic.com/steam/apps/265300/header.jpg?t=1635242250"
+            }
+        
+          ]
+        }
+        ],
       "id": 5
     }
   ]

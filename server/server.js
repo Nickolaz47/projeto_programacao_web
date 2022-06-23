@@ -3,11 +3,11 @@ const express = require('express')
 const app = express()
 const publishersRouter = require('./publishers/router')
 const genresRouter = require('./genres/router')
-// const gamesRouter = require('./games/router')
+const gamesRouter = require('./games/router')
 
 app.use(express.json())
 app.use('/publishers', publishersRouter)
-// app.use('/games', gamesRouter)
+app.use('/games', gamesRouter)
 app.use('/genres', genresRouter)
 
 

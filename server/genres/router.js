@@ -43,9 +43,17 @@ genresRouter.get('/', async (req, res) => {
 })
 
 genresRouter.post('/', async (req, res) => {
-    const newRegister = req.body;  
-    console.log("Recebi do post: " + newRegister.value); 
-    res.status(201).json(newRegister);
+    const dbJSON = await readDb();
+    const {idCompany, genre} = req.body;
+    let new_genre = {};  
+    new_genre[genre] = [];
+    dbJSON.map(company => {
+            if (company.id == idCompany){
+                company.games.push(new_genre);
+            }
+        })
+    await fs.writeFile(db, JSON.stringify(dbJSON))
+    res.status(201).json("OK!");
 })
 
 genresRouter.put('/:companyId', async (req, res) => {

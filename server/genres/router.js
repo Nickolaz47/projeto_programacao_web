@@ -1,10 +1,16 @@
 const express = require('express')
 const fs = require('fs/promises')
 const genresRouter = express.Router()
-const db = './db.json'
+// const path = require('path');
+// const dataPath = path.join(__dirname, 'data.json')
+
+const basePathIdx = __dirname.lastIndexOf('genres');
+const cutDir = __dirname.slice(0,basePathIdx);
+const dataPath = cutDir + '/db.json';
+// console.log(dataPath);
 
 const readDb = async () => {
-    const dbJSON = await fs.readFile(db)    
+    const dbJSON = await fs.readFile(dataPath)    
     const jsonParsed = JSON.parse(dbJSON)
     return jsonParsed
 }

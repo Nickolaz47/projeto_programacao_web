@@ -1,17 +1,6 @@
 const express = require('express')
-const fs = require('fs/promises')
 const publishersRouter = express.Router()
-// const path = require('path');
-// const dataPath = path.join(__dirname, 'data.json')
-const basePathIdx = __dirname.lastIndexOf('publishers');
-const cutDir = __dirname.slice(0,basePathIdx);
-const dataPath = cutDir + '/db.json';
-
-const readDb = async () => {
-    const dbJSON = await fs.readFile(dataPath)    
-    const jsonParsed = JSON.parse(dbJSON)
-    return jsonParsed
-}
+const {readDb, writeDb} = require('./repository')
 
 const generateId = async () => {
     const dbJSON = await readDb()    
@@ -73,7 +62,7 @@ publishersRouter.post('/', async (req, res) => {
     const newRegister = req.body    
     newRegister.id = await generateId()    
     publishersDb.push(newRegister)
-    await fs.writeFile(db, JSON.stringify(publishersDb))
+    await writeDb(publishersDb)    
     res.status(201).json(newRegister)
 })
 
@@ -96,7 +85,7 @@ publishersRouter.put('/:publisherId', async (req, res) => {
                 publisher.games = games === undefined ? [...games, ...publisherToUpdate.games] : games
             }
         })
-        await fs.writeFile(db, JSON.stringify(publishersDb))
+        await writeDb(publishersDb)
         res.status(200).send(`Atualizado!`)
     } else {
         res.status(400).send('Id inválido!')
@@ -113,7 +102,7 @@ publishersRouter.delete('/:publisherId', async (req, res) => {
 
     if(publisherToDelete !== undefined) {       
         publishersDb.splice(publishersDb.indexOf(publisherToDelete), 1)
-        await fs.writeFile(db, JSON.stringify(publishersDb))        
+        await writeDb(publishersDb)        
         res.status(200).send(publisherToDelete)
     } else {
         res.status(400).send('Id inválido!')

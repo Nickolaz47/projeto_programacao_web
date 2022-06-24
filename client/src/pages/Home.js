@@ -1,7 +1,11 @@
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { GamesContext } from "../context/GamesContext";
 
-const Home = ({ games }) => {
+const Home = () => {
+  const { games } = useContext(GamesContext);
+  
   return (
     <section>
       {games.map(({ id, name, img }) => (

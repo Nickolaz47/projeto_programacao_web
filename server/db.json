@@ -79,20 +79,7 @@
             "img": "https://cdn.cloudflare.steamstatic.com/steam/apps/722230/header.jpg?t=1618852074"
           }
         ]
-      },
-      {
-        "Racing": [
-          {
-            "id": 8,
-            "name": "Midnight Club: Street Racing",
-            "developer": "Rockstar North",
-            "genre": "Racing",
-            "released": "25 Out, 2000",
-            "img": "https://upload.wikimedia.org/wikipedia/pt/thumb/2/25/Midnight_Club_Street_Racing_capa.jpg/270px-Midnight_Club_Street_Racing_capa.jpg"
-          }
-        ]
-      }
-    ],
+      }],
     "id": 2
   },
   {
@@ -109,7 +96,7 @@
             "developer": "Bethesda",
             "genre": "RPG",
             "released": "11 Nov, 2011",
-            "img": "https://upload.wikimedia.org/wikipedia/pt/a/aa/The_Elder_Scrolls_5_Skyrim_capa.png"
+            "img": "https://cdn.akamai.steamstatic.com/steam/apps/489830/header.jpg?t=1650909796"
           },
           {
             "id": 10,
@@ -144,14 +131,6 @@
     "games": [
       {
         "RPG": [
-          {
-            "id": 12,
-            "name": "Kingdom Hearts III",
-            "developer": "Square Enix",
-            "genre": "RPG",
-            "released": "25 Jan, 2019",
-            "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VAWGsaRhBUKcyxQv5rtPkm5axtyn2sfRfA&usqp=CAU"
-          },
           {
             "id": 13,
             "name": "Bravely Default II",

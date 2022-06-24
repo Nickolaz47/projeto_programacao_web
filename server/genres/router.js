@@ -44,6 +44,15 @@ genresRouter.get('/', async (req, res) => {
     }else if(limit){
         genres = genres.slice(1,limit)
         res.json(genres);
+    }else if(name){
+        console.log(genres)
+        console.log(name)
+        console.log(genres.includes(name))
+        if (genres.includes(name)){
+            res.json(name);
+        }else{
+            res.json("ERROR: Genre not found");
+        }
     }else{
         res.json(genres);
     }
@@ -113,7 +122,7 @@ genresRouter.delete('/', async (req, res) => {
     if(successFlag){
         res.status(201).json("[INFO]: Genre removed!");
     }else{
-        res.status(404).json("[ERROR]: Genre not found!");
+        res.status(404).json("[ERROR]: Genre or Company not found!");
     }
 })
 

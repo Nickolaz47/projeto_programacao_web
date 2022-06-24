@@ -1,14 +1,13 @@
 import styles from "./Game.module.css";
 import { useParams, Link } from "react-router-dom";
-import { useContext } from "react";
-import { GamesContext } from "../context/GamesContext";
 
-const Game = () => {
+
+const Game = ({games}) => {
   const { id } = useParams();
-  const { games } = useContext(GamesContext);
-  const { name, img, developer, genre, released } = games.find(
-    (game) => game.id === id
+  const game = games.find(
+    (g) => g.id === Number(id)
   );
+  const { name, img, developer, genre, released } = game  
 
   return (
     <section>
@@ -21,7 +20,7 @@ const Game = () => {
           <p>Lançamento: {released}</p>
         </div>
         <button type="button">
-          <Link to={"/"}>Info</Link>
+          <Link to={"/"}>Voltar</Link>
         </button>
       </div>
     </section>

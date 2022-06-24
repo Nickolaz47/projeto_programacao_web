@@ -1,11 +1,8 @@
 import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { GamesContext } from "../context/GamesContext";
 
-const Home = () => {
-  const { games } = useContext(GamesContext);
-  
+
+const Home = ({games}) => {
   return (
     <section>
       {games.map(({ id, name, img }) => (
@@ -14,7 +11,7 @@ const Home = () => {
             <img src={img} alt={name} />
             <figcaption>{name}</figcaption>
             <button type="button">
-              <Link to={`/game/${id}`}>Info</Link>
+              <Link to={`/games/${id}`}>Info</Link>
             </button>
           </figure>
         </div>

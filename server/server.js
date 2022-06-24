@@ -1,10 +1,12 @@
 
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const publishersRouter = require('./publishers/router')
 const genresRouter = require('./genres/router')
 const gamesRouter = require('./games/router')
 
+app.use(cors())
 app.use(express.json())
 app.use('/publishers', publishersRouter)
 app.use('/games', gamesRouter)

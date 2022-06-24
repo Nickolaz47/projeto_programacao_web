@@ -1,137 +1,95 @@
-const express = require('express')
-const fs = require('fs/promises')
-const publishersRouter = express.Router()
-// const path = require('path');
-// const dataPath = path.join(__dirname, 'data.json')
-const basePathIdx = __dirname.lastIndexOf('publishers');
-const cutDir = __dirname.slice(0,basePathIdx);
-const dataPath = cutDir + '/db.json';
+const express = require("express");
+const publishersRouter = express.Router();
+const {
+  processGet,
+  processGetById,
+  processGetGenresFromPublisher,
+  processGetGamesByGenresFromPublisher,
+  processGetGamesFromPublisher,
+  processPost,
+  processPut,
+  processDelete,
+} = require("./controller");
 
-const readDb = async () => {
-    const dbJSON = await fs.readFile(dataPath)    
-    const jsonParsed = JSON.parse(dbJSON)
-    return jsonParsed
-}
+publishersRouter.get("/", async (req, res) => {
+  const { limit, name, sortBy } = req.query;  
+  res.json(await processGet(limit, name, sortBy));
+});
 
-const generateId = async () => {
-    const dbJSON = await readDb()    
-    if (dbJSON.length > 0) {
-        const idList = dbJSON.map((obj) => obj.id).sort()        
-        const lastId = Number(idList.slice(-1))        
-        return lastId + 1
-    } else {
-        return 1
-    }        
-}
-
-const sortObjs = (obj1, obj2) => {
-    if (obj1.name > obj2.name) {
-      return 1
-    } else if (obj1.name < obj2.name) {
-      return -1
-    } else {
-      return 0
-    }
+publishersRouter.get("/:publisherId", async (req, res) => {  
+  const { publisherId } = req.params;
+  const publisher = await processGetById(publisherId)
+  if (publisher !== undefined) {
+    res.send(publisher);
+  } else {
+    res.status(400).send("Id inválido!");
   }
+});
 
-publishersRouter.get('/', async (req, res) => {
-    const dbJSON = await readDb()
-    const { limit, name, sortBy } = req.query
-    let dbJSONMod = undefined
-    if (limit !== undefined && !isNaN(Number(limit))) {
-        dbJSONMod = dbJSON.slice(0, limit)
-    }
-    
-    if (sortBy === 'name') {
-        if (dbJSONMod) {
-            dbJSONMod = dbJSONMod.sort(sortObjs)            
-        } else {
-            dbJSONMod = dbJSON.sort(sortObjs)            
-        } 
-    }
+publishersRouter.get("/:publisherId/genres", async (req, res) => {  
+  const { publisherId } = req.params;
+  const genres = await processGetGenresFromPublisher(publisherId)
+  if(genres !== undefined) {
+    res.json(genres)
+  } else {
+    res.status(400).send("Id inválido!");
+  }  
+});
 
-    if (name !== undefined) {
-        const nameToSearch = name.toLowerCase()
-        if (dbJSONMod) {
-            const objFound = dbJSONMod.find((obj) => obj.name.toLowerCase() === nameToSearch)
-            dbJSONMod = objFound
-        } else {
-            const objFound = dbJSON.find((obj) => obj.name.toLowerCase() === nameToSearch)
-            dbJSONMod = objFound
-        }      
-    }
+publishersRouter.get("/:publisherId/genres/games", async (req, res) => {  
+  const { publisherId } = req.params;
+  const gamesByGenrer = await processGetGamesByGenresFromPublisher(publisherId)
+  if(gamesByGenrer !== undefined) {
+    res.json(gamesByGenrer)
+  } else {
+    res.status(400).send("Id inválido!");
+  }  
+});
 
-    if(dbJSONMod !== undefined) {
-        res.json(dbJSONMod)
-    } else {
-        res.json(dbJSON)
-    }
-})
+publishersRouter.get("/:publisherId/games", async (req, res) => {  
+  const { publisherId } = req.params;
+  const gamesByGenrer = await processGetGamesFromPublisher(publisherId)
+  if(gamesByGenrer !== undefined) {
+    res.json(gamesByGenrer)
+  } else {
+    res.status(400).send("Id inválido!");
+  }  
+});
 
-publishersRouter.post('/', async (req, res) => {
-    const publishersDb = await readDb()        
-    const newRegister = req.body    
-    newRegister.id = await generateId()    
-    publishersDb.push(newRegister)
-    await fs.writeFile(db, JSON.stringify(publishersDb))
-    res.status(201).json(newRegister)
-})
+publishersRouter.post("/", async (req, res) => {
+  const newRegister = req.body;
+  await processPost(newRegister);
+  res.status(201).json(newRegister);
+});
 
-publishersRouter.put('/:publisherId', async (req, res) => {
-    const publishersDb = await readDb()
-    const {name, foundation, headquarters, logo, games} = req.body
-    const {publisherId} = req.params
-    const publisherIdNumber = Number(publisherId)
-    const publisherToUpdate = publishersDb.find(
-        publisher => publisher.id === publisherIdNumber
-    )
-    
-    if(publisherToUpdate !== undefined) {        
-        publishersDb.forEach(publisher => {
-            if (publisher.id === publisherIdNumber) {
-                publisher.name = name === undefined ? publisherToUpdate.name : name
-                publisher.foundation = foundation === undefined ? publisherToUpdate.foundation : foundation
-                publisher.headquarters = headquarters === undefined ? publisherToUpdate.headquarters : headquarters
-                publisher.logo = logo === undefined ? publisherToUpdate.logo : logo
-                publisher.games = games === undefined ? [...games, ...publisherToUpdate.games] : games
-            }
-        })
-        await fs.writeFile(db, JSON.stringify(publishersDb))
-        res.status(200).send(`Atualizado!`)
-    } else {
-        res.status(400).send('Id inválido!')
-    }
-})
+publishersRouter.put("/:publisherId", async (req, res) => {
+  const { name, foundation, headquarters, logo, games } = req.body;
+  const { publisherId } = req.params;
+  const result = await processPut(
+    name,
+    foundation,
+    headquarters,
+    logo,
+    games,
+    publisherId
+  );
+  if (result) {
+    res.status(200).send(`Atualizado!`);
+  } else {
+    res.status(400).send("Id inválido!");
+  }
+});
 
-publishersRouter.delete('/:publisherId', async (req, res) => {
-    const publishersDb = await readDb()
-    const {publisherId} = req.params
-    const publisherIdNumber = Number(publisherId)    
-    const publisherToDelete = publishersDb.find(
-        publisher => publisher.id === publisherIdNumber
-    )
+publishersRouter.delete("/:publisherId", async (req, res) => {
+  const { publisherId } = req.params;
+  const { success, object: publisherDeleted } = await processDelete(
+    publisherId
+  );
+  if (success) {
+    res.status(200).send(publisherDeleted);
+  } else {
+    res.status(400).send("Id inválido!");
+  }
+});
 
-    if(publisherToDelete !== undefined) {       
-        publishersDb.splice(publishersDb.indexOf(publisherToDelete), 1)
-        await fs.writeFile(db, JSON.stringify(publishersDb))        
-        res.status(200).send(publisherToDelete)
-    } else {
-        res.status(400).send('Id inválido!')
-    }
-})
-
-publishersRouter.get('/:publisherId', async (req, res) => {
-    const dbJSON = await readDb()
-    const {publisherId} = req.params
-    const publisherIdNumber = Number(publisherId)    
-    const publisher = dbJSON.find(
-        publ => publ.id === publisherIdNumber
-    )
-    if(publisher !== undefined) {               
-        res.send(publisher)
-    } else {
-        res.status(400).send('Id inválido!')
-    }
-})
-
-module.exports = publishersRouter
+module.exports = publishersRouter;

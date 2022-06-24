@@ -27,6 +27,21 @@ const getObjectById = (db, objId) => {
   return object;
 };
 
+const getGenresFromPublisher = (publisher) => {
+  const genres = publisher.games.map((obj) => Object.keys(obj)[0]);
+  return genres;
+};
+
+const getGamesFromPublisher = (publisher) => {
+  const games = []
+  for (const genre of publisher.games) {
+    for (const game of Object.values(genre)) {
+      games.push(...game)
+    }
+  }
+  return games
+};
+
 const updateObject = async (
   name,
   foundation,
@@ -86,7 +101,7 @@ const processGet = async (limit, name, sortBy) => {
       dbJSONMod = objFound;
     }
   }
-  
+
   if (dbJSONMod !== undefined) {
     return dbJSONMod;
   } else {
@@ -95,10 +110,28 @@ const processGet = async (limit, name, sortBy) => {
 };
 
 const processGetById = async (objId) => {
-    const dbJSON = await readDb();
-    const object = getObjectById(dbJSON, objId)
-    return object
-}
+  const dbJSON = await readDb();
+  const object = getObjectById(dbJSON, objId);
+  return object;
+};
+
+const processGetGenresFromPublisher = async (objId) => {
+  const dbJSON = await readDb();
+  const object = getObjectById(dbJSON, objId);
+  return getGenresFromPublisher(object);
+};
+
+const processGetGamesByGenresFromPublisher = async (objId) => {
+  const dbJSON = await readDb();
+  const object = getObjectById(dbJSON, objId);
+  return object.games;
+};
+
+const processGetGamesFromPublisher = async (objId) => {
+  const dbJSON = await readDb();
+  const object = getObjectById(dbJSON, objId);
+  return getGamesFromPublisher(object);
+};
 
 const processPost = async (newRegister) => {
   const dbJSON = await readDb();
@@ -144,6 +177,9 @@ const processDelete = async (objId) => {
 module.exports = {
   processGet,
   processGetById,
+  processGetGenresFromPublisher,
+  processGetGamesByGenresFromPublisher,
+  processGetGamesFromPublisher,
   processPost,
   processPut,
   processDelete,

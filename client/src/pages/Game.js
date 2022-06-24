@@ -1,17 +1,13 @@
-import styles from "./Game.module.css";
 import { useParams, Link } from "react-router-dom";
 
-
-const Game = ({games}) => {
+const Game = ({ games }) => {
   const { id } = useParams();
-  const game = games.find(
-    (g) => g.id === Number(id)
-  );
-  const { name, img, developer, genre, released } = game  
+  const game = games.find((g) => g.id === Number(id));
+  const { name, img, developer, genre, released } = game;
 
   return (
-    <section>
-      <div>
+    <section className="container">
+      <div className="text-center">
         <h3>{name}</h3>
         <img src={img} alt={name} />
         <div>
@@ -19,9 +15,7 @@ const Game = ({games}) => {
           <p>Gênero: {genre}</p>
           <p>Lançamento: {released}</p>
         </div>
-        <button type="button">
-          <Link to={"/"}>Voltar</Link>
-        </button>
+        <Link className="btn btn-secondary" to={"/"}>Voltar</Link>
       </div>
     </section>
   );

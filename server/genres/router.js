@@ -39,69 +39,88 @@ async function removeDuplicates(array){
 genresRouter.get('/', async (req, res) => {
     const dbJSON = await readDb()
     let genres = [];
+    const { limit, sortBy, name } = req.query;
     dbJSON.map(company => 
         {if (company.games.length > 0){
             company.games.map(genre => genres.push(Object.keys(genre)[0]))
         }}
     )
     genres = await removeDuplicates(genres)
-    res.json(genres);
+    if(sortBy) {
+        if(sortBy === 'genre') {
+            genres = await genres.sort();
+            res.json(genres)
+        }
+    }else{
+        res.json(genres);
+    }
 })
 
 genresRouter.post('/', async (req, res) => {
     const dbJSON = await readDb();
     const {idCompany, genre} = req.body;
+    let successFlag = false
     let new_genre = {};  
     new_genre[genre] = [];
     dbJSON.map(company => {
             if (company.id == idCompany){
                 company.games.push(new_genre);
+                successFlag = true
             }
         })
-    await fs.writeFile(db, JSON.stringify(dbJSON))
-    res.status(201).json("OK!");
+    await fs.writeFile(dataPath, JSON.stringify(dbJSON))
+    if(successFlag){
+        res.status(201).json("[INFO]: New genre added!");
+    }else{
+        res.status(404).json("[ERRO]: Company not found!")
+    }
+
 })
 
-genresRouter.put('/:companyId', async (req, res) => {
-    const companiesDb = await readDb()
-    const {name, foundation, headquarters, logo, games} = req.body
-    const {companyId} = req.params
-    const companyIdNumber = Number(companyId)
-    const companyToUpdate = companiesDb.find(
-        company => company.id === companyIdNumber
-    )
-    
-    if(companyToUpdate !== undefined) {        
-        companiesDb.forEach(company => {
-            if (company.id === companyIdNumber) {
-                company.name = name === undefined ? companyToUpdate.name : name
-                company.foundation = foundation === undefined ? companyToUpdate.foundation : foundation
-                company.headquarters = headquarters === undefined ? companyToUpdate.headquarters : headquarters
-                company.logo = logo === undefined ? companyToUpdate.logo : logo
-                company.games = games === undefined ? companyToUpdate.games : games
+genresRouter.put('/', async (req, res) => {
+    const dbJSON = await readDb()
+    const {oldGenreName, newGenreName} = req.body
+    let successFlag = false
+    dbJSON.map(company => {
+        company.games.map(genre => {
+            if(Object.keys(genre)[0] == oldGenreName){
+                new_genre = {}
+                new_genre[newGenreName] = genre[oldGenreName]
+                company.games.push(new_genre)
+                const idx = company.games.indexOf(genre)
+                company.games.splice(idx, 1);
+                successFlag = true
             }
         })
-        await fs.writeFile(db, JSON.stringify(companiesDb))
-        res.status(200).send(`Atualizado!`)
-    } else {
-        res.status(400).send('Id inválido!')
+    })
+    await fs.writeFile(dataPath, JSON.stringify(dbJSON))
+    if(successFlag){
+        res.status(201).json("[INFO]: Genre updated!");
+    }else{
+        res.status(404).json("[ERROR]: Genre not found!");
     }
 })
 
-genresRouter.delete('/:companyId', async (req, res) => {
-    const companiesDb = await readDb()
-    const {companyId} = req.params
-    const companyIdNumber = Number(companyId)    
-    const companyToDelete = companiesDb.find(
-        company => company.id === companyIdNumber
-    )
-
-    if(companyToDelete !== undefined) {       
-        companiesDb.splice(companiesDb.indexOf(companyToDelete), 1)
-        await fs.writeFile(db, JSON.stringify(companiesDb))        
-        res.status(200).send(companyToDelete)
-    } else {
-        res.status(400).send('Id inválido!')
+genresRouter.delete('/', async (req, res) => {
+    const dbJSON = await readDb()
+    const {idCompany, genreToRemove} = req.body
+    let successFlag = false
+    dbJSON.map(company => {
+        if(company.id == idCompany){
+            company.games.map(genre => {
+                if(Object.keys(genre)[0] == genreToRemove){
+                    const idx = company.games.indexOf(genre)
+                    company.games.splice(idx, 1);
+                    successFlag = true
+                }
+            })
+        }
+    })
+    await fs.writeFile(dataPath, JSON.stringify(dbJSON))
+    if(successFlag){
+        res.status(201).json("[INFO]: Genre removed!");
+    }else{
+        res.status(404).json("[ERROR]: Genre not found!");
     }
 })
 

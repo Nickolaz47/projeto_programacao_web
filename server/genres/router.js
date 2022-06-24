@@ -15,16 +15,6 @@ const readDb = async () => {
     return jsonParsed
 }
 
-const generateId = async () => {
-    const dbJSON = await readDb()    
-    if (dbJSON.length > 0) {
-        const idList = dbJSON.map((obj) => obj.id).sort()        
-        const lastId = Number(idList.slice(-1))        
-        return lastId + 1
-    } else {
-        return 1
-    }        
-}
 
 async function removeDuplicates(array){
     finalArray = [];
@@ -51,6 +41,9 @@ genresRouter.get('/', async (req, res) => {
             genres = await genres.sort();
             res.json(genres)
         }
+    }else if(limit){
+        genres = genres.slice(1,limit)
+        res.json(genres);
     }else{
         res.json(genres);
     }

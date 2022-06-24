@@ -1,8 +1,6 @@
 const express = require('express');
-const gamesRouter = express.Router(); // será utilizado router depois
-const app = express(); // por hora, utilizado para testar com postman
+const gamesRouter = express.Router(); 
 const fsPromises = require('fs/promises');
-// const path = require('path');
 const basePathIdx = __dirname.lastIndexOf('games');
 const cutDir = __dirname.slice(0,basePathIdx);
 const dataPath = cutDir + '/db.json';
@@ -15,11 +13,9 @@ const readDb = async () => {
     return jsonParsed
 };
 
-
-
-gamesRouter.get('/', async (req,res) => {
-    console.clear();
+const generateGamesDb = async () => {
     const games = await readDb();
+
     const gamesPrint = []
 
     for (index in games) {
@@ -44,6 +40,12 @@ gamesRouter.get('/', async (req,res) => {
         }
     }
 
+    return gamesPrint2;
+}
+
+gamesRouter.get('/', async (req,res) => {
+    const gamesPrint2 = await generateGamesDb();
+
     const { limit, sortBy, name } = req.query;
     const listGamesLimited = gamesPrint2.slice(0,limit);
     const nomesGames = gamesPrint2.map(game => game.name);
@@ -59,7 +61,7 @@ gamesRouter.get('/', async (req,res) => {
         if(sortBy === 'name') {
             return res.json(gamesSorted)
         }
-        res.status(400).send('Critério de organização não definido') // É esse mesmo o status code?
+        res.status(400).send('Critério de organização não definido')
     }
 
     if(limit) {
@@ -78,31 +80,7 @@ gamesRouter.get('/', async (req,res) => {
 });
 
 gamesRouter.get('/:gameID', async (req,res) => {
-    const games = await readDb();
-
-    const gamesPrint = []
-
-    for (index in games) {
-        const primeiraCamadaFor = games[index]; 3
-        const segundaCamadaFor = primeiraCamadaFor.games;
-        for (index in segundaCamadaFor) {
-            const terceiraCamadaFor = segundaCamadaFor[index];
-            const valuesTerceiraCamada = Object.values(terceiraCamadaFor)
-            gamesPrint.push(valuesTerceiraCamada)
-        }
-    }
-
-    const gamesPrint2 = []
-
-    for (index in gamesPrint) {
-        const outraPrimeiraCamada = gamesPrint[index]
-        for (index2 in outraPrimeiraCamada) {
-            const outraSegundaCamada = gamesPrint[index][index2]
-            for (index3 in outraSegundaCamada) {
-                gamesPrint2.push(outraSegundaCamada[index3])
-            }
-        }
-    }
+    const gamesPrint2 = await generateGamesDb();
 
     const { gameID } = req.params;
     const gameIDNumber = Number(gameID);
@@ -114,27 +92,27 @@ gamesRouter.get('/:gameID', async (req,res) => {
         return res.status(400).send('ID do jogo inválido')
     }
 
-    const gameFiltered = gamesPrint2.filter(game => game.id === gameIDNumber)
-    // console.log(gameID);
+    const gameFiltered = gamesPrint2.filter(game => game.id === gameIDNumber);
+
     res.json(gameFiltered);
 });
 
 
-gamesRouter.post('/', async (res,req) => {
-    const games = await readDb();
-    const { name, developer, genre, released } = req.body; // testar requisição no postman
-    const lastID = '' // ver qual a lógica do Weatherlly para, então, pegar o último id
-    const newGame = {
-        id: `${lastID + 1}`,
-        name: `${name}`,
-        developer: `${developer}`,
-        genre: `${genre}`,
-        released: `${released}`,
-    }
-    games.push(newGame)
-    res.status(201).send(`Jogo adicionado: \n ${newGame}`)
-})
 
-gamesRouter.put('/:gameID')
+gamesRouter.post('/:gameID', async (res,req) => {
+    const games = await readDb();
+    const {gameID} = req.params;
+    // const {id, name}  = req.body; 
+    // const 
+    // const newGame = {
+    //     id: `${lastID + 1}`,
+    //     name: `${name}`,
+    //     developer: `${developer}`,
+    //     genre: `${genre}`,
+    //     released: `${released}`,
+    // }
+    console.log(gameID)
+    // res.status(201).send(`Jogo adicionado: \n ${newGame}`)
+})
 
 module.exports = gamesRouter;
